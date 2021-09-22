@@ -3,23 +3,22 @@
 import os
 from sorters import Sorters
 
-numberOfItems = 9
+numberOfItems = 2500
 randomList = [i + 1 for i in range(numberOfItems)]
 sortedList = sorted(randomList)
-seeSort = True
+seeSort = False
 
 sorter = Sorters(randomList, sortedList, seeSort)
 
 def optimized():
-    sorter.radix_sort()
-    sorter.selection_sort()
-    sorter.bogo_sort()
-    sorter.insert_sort()
-    sorter.pancake_sort()
     sorter.bubble_sort()
+    sorter.bogo_sort()
+    sorter.pancake_sort()
+    sorter.selection_sort()
+    sorter.radix_sort()
 
 def notOptimized():
-    pass
+    sorter.insert_sort() # THIS IS BROKE
 
 def notMade():
     sorter.shell_sort()
@@ -34,7 +33,7 @@ def continueThings():
 
 countBubble = sorter.bubble_sort(0)
 print("BUBBLE SORT --- Total Iterations: {}".format(countBubble))
-if numberOfItems < 11:
+if numberOfItems <= 11:
     continueThings()
     countBogo = sorter.bogo_sort(0)
     print("BOGO SORT --- Total Iterations: {}".format(countBogo))

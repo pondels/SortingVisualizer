@@ -57,9 +57,10 @@ class Sorters():
                         self.list.insert(items, currentValue)
                         items += 1
                     count += 1
-                    print(self.list)
+                    if self.seeSort:
+                        print(self.list)
                 if self.sorted == self.list:
-                        break
+                    break
             items = 0
         return count
 
