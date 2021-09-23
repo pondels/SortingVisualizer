@@ -1,4 +1,6 @@
 import random
+from visualizer import Visualizer
+import time
 
 class Sorters():
 
@@ -6,6 +8,7 @@ class Sorters():
         self.seeSort = seeSort
         self.list = list
         self.sorted = sorted
+        self.visualizer = Visualizer()
 
     def flip(self, list, smallest_num, ignoreNums, count, seeSort):
 
@@ -21,6 +24,8 @@ class Sorters():
         new_list.reverse()
         count += 1
         new_list = first_values + new_list
+        time.sleep(.05)
+        self.visualizer.run_self(new_list)
         return new_list, count
 
     def pancake_sort(self, count):
@@ -57,6 +62,8 @@ class Sorters():
                         self.list.insert(items, currentValue)
                         items += 1
                     count += 1
+                    time.sleep(.05)
+                    self.visualizer.run_self(self.list)
                     if self.seeSort:
                         print(self.list)
                 if self.sorted == self.list:
@@ -73,28 +80,24 @@ class Sorters():
     def insert_sort(self, count):
         random.shuffle(self.list)
 
-        for i in range(len(self.list)):
-            n = i
-            for _ in range(i):
-                count += 1 
+        # INSERT SORT CODE CREDIT TO MOHIT KUMRA
+        # https://www.geeksforgeeks.org/insertion-sort/
 
-                if self.seeSort:
-                    print(f"CHECKING {self.list[i]} and {self.list[n]} in {self.list}")
+        # 10 TIMES MORE OPTIMIZED THAN MY CODE SO... KUDDOS
 
-                valueOfI = self.list[i]
-                indexOfI = self.list.index(self.list[i])
-                n -= 1
+        for i in range(1, len(self.list)):
+ 
+            num = self.list[i]
+    
+            j = i-1
+            while j >= 0 and num < self.list[j] :
+                self.list[j + 1] = self.list[j]
+                j -= 1
+                count += 1
+            self.list[j + 1] = num
+            time.sleep(.05)
+            self.visualizer.run_self(self.list)
 
-                if self.list[n] > self.list[i] and n == 0:
-                    self.list.pop(indexOfI)
-                    self.list.insert(0, valueOfI)
-                    break
-                elif self.list[n] > self.list[i] > self.list[n-1]:
-                    self.list.pop(indexOfI)
-                    self.list.insert(n, valueOfI)
-                    break
-        if self.seeSort:
-            print(f"SORTED LIST: {self.list}")
         return count
 
     def checkForCorrectBogo(self, list):
@@ -114,6 +117,7 @@ class Sorters():
 
             amount = self.checkForCorrectBogo(self.list)
             totalBogo[amount].append("")
+            self.visualizer.run_self(self.list)
 
         if self.seeSort:
             totalLoops = -1
@@ -137,6 +141,8 @@ class Sorters():
                     else:
                         swapValue = False
                     count += 1
+                    time.sleep(.05)
+                    self.visualizer.run_self(self.list)
                     if self.seeSort:
                         if swapValue:
                             print(self.list, f"\033[91mVALUES SWAPPED\033[0m: \033[91m[{self.list[i+1], self.list[i]}]\033[0m \033[95mITERATION\033[0m: \033[92m{count}\033[0m")
@@ -145,7 +151,7 @@ class Sorters():
         return count
 
     def shell_sort(self):
-        pass
+        shellIntervals = [4, 2, 1]
 
     def heap_sort(self):
         pass
@@ -168,6 +174,8 @@ class Sorters():
             self.list.append(current_number)
             current_number = ''
             index += 1
+            time.sleep(.05)
+            self.visualizer.run_self(self.list)
             if self.seeSort:
                 print(f"FOUND {current_number} IN INDEX {indexOfI} OF {self.list}")
         if self.seeSort:

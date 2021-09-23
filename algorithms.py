@@ -1,13 +1,17 @@
 # https://www.geeksforgeeks.org/sorting-algorithms/
+# https://www.w3resource.com/ODSA/AV/Sorting/shellsortAV.html
 
-import os
+from random import random
+import time
 from sorters import Sorters
+from visualizer import Visualizer
 
-numberOfItems = 2500
+numberOfItems = 50
 randomList = [i + 1 for i in range(numberOfItems)]
 sortedList = sorted(randomList)
 seeSort = False
 
+visualizer = Visualizer()
 sorter = Sorters(randomList, sortedList, seeSort)
 
 def optimized():
@@ -27,37 +31,42 @@ def notMade():
     sorter.quick_sort()
 
 def continueThings():
-    input("Press 'Enter' to Continue > ")
-    os.system('cls')
-    print("Computing . . . ")
+    time.sleep(5)
 
-countBubble = sorter.bubble_sort(0)
-print("BUBBLE SORT --- Total Iterations: {}".format(countBubble))
-if numberOfItems <= 11:
+def finished():
+    time.sleep(10)
+
+def main():
+    countBubble = sorter.bubble_sort(0)
+    print("BUBBLE SORT --- Total Iterations: {}".format(countBubble))
+    if numberOfItems <= 8:
+        continueThings()
+        countBogo = sorter.bogo_sort(0)
+        print("BOGO SORT --- Total Iterations: {}".format(countBogo))
     continueThings()
-    countBogo = sorter.bogo_sort(0)
-    print("BOGO SORT --- Total Iterations: {}".format(countBogo))
-continueThings()
-countInsert = sorter.insert_sort(0)
-print("INSERT SORT --- Total Iterations: {}".format(countInsert))
-# continueThings()
-# countQuick = quick_sort(randomList, count, seeSort)
-# print("QUICKSORT --- Total Iterations: {}".format(countQuick))
-# continueThings()
-# countMerge = merge_sort(randomList, count, seeSort)
-# print("MERGE SORT --- Total Iterations: {}".format(countMerge))
-continueThings()
-countSelection = sorter.selection_sort(0)
-print("SELECTION SORT --- Total Iterations: {}".format(countSelection))
-# continueThings()
-# countHeap = heap_sort(randomList, count, seeSort)
-# print("HEAP SORT --- Total Iterations: {}".format(countHeap))
-# continueThings()
-# countShell = shell_sort(randomList, count, seeSort)
-# print("SHELL SORT --- Total Iterations: {}".format(countShell))
-continueThings()
-countPancake = sorter.pancake_sort(0)
-print("PANCAKE SORT --- Total Iterations: {}".format(countPancake))
-continueThings()
-countRadix = sorter.radix_sort(0)
-print("RADIX SORT --- Total Iterations: {}".format(countRadix))
+    countInsert = sorter.insert_sort(0)
+    print("INSERT SORT --- Total Iterations: {}".format(countInsert))
+    continueThings()
+    countSelection = sorter.selection_sort(0)
+    print("SELECTION SORT --- Total Iterations: {}".format(countSelection))
+    continueThings()
+    countPancake = sorter.pancake_sort(0)
+    print("PANCAKE SORT --- Total Iterations: {}".format(countPancake))
+    continueThings()
+    countRadix = sorter.radix_sort(0)
+    print("RADIX SORT --- Total Iterations: {}".format(countRadix))
+    finished()
+    # countHeap = heap_sort(randomList, count, seeSort)
+    # print("HEAP SORT --- Total Iterations: {}".format(countHeap))
+    # continueThings()
+    # countShell = shell_sort(randomList, count, seeSort)
+    # print("SHELL SORT --- Total Iterations: {}".format(countShell))
+    # continueThings()
+    # countQuick = quick_sort(randomList, count, seeSort)
+    # print("QUICKSORT --- Total Iterations: {}".format(countQuick))
+    # continueThings()
+    # countMerge = merge_sort(randomList, count, seeSort)
+    # print("MERGE SORT --- Total Iterations: {}".format(countMerge))
+
+if __name__ == "__main__":
+    main()
