@@ -1,12 +1,12 @@
 # https://www.geeksforgeeks.org/sorting-algorithms/
 # https://www.w3resource.com/ODSA/AV/Sorting/shellsortAV.html
 
-from random import random
+import random
 import time
 from sorters import Sorters
 from visualizer import Visualizer
 
-numberOfItems = 50
+numberOfItems = 51
 randomList = [i + 1 for i in range(numberOfItems)]
 sortedList = sorted(randomList)
 seeSort = False
@@ -32,11 +32,13 @@ def notMade():
 
 def continueThings():
     time.sleep(5)
+    sorter.randomize()
 
 def finished():
     time.sleep(10)
 
 def main():
+    continueThings()
     countBubble = sorter.bubble_sort(0)
     print("BUBBLE SORT --- Total Iterations: {}".format(countBubble))
     if numberOfItems <= 8:
@@ -55,18 +57,30 @@ def main():
     continueThings()
     countRadix = sorter.radix_sort(0)
     print("RADIX SORT --- Total Iterations: {}".format(countRadix))
-    finished()
+    continueThings()
+    countGnome = sorter.gnome_sort(0)
+    print("GNOME SORT --- Total Iterations: {}".format(countGnome))
     # countHeap = heap_sort(randomList, count, seeSort)
     # print("HEAP SORT --- Total Iterations: {}".format(countHeap))
-    # continueThings()
-    # countShell = shell_sort(randomList, count, seeSort)
-    # print("SHELL SORT --- Total Iterations: {}".format(countShell))
+    continueThings()
+    countShell = sorter.shell_sort(0)
+    print("SHELL SORT --- Total Iterations: {}".format(countShell))
+    continueThings()
+    countOddEven = sorter.oddEvenSort(0)
+    print("ODDEVEN SORT --- Total Iterations: {}".format(countOddEven))
+    continueThings()
+    countStooge = sorter.stoogesort(0, 0, len(randomList) - 1)
+    print("STOOGE SORT --- Total Iterations: {}".format(countStooge))
+    continueThings()
+    countCocktail = sorter.cocktailSort(0)
+    print("COCKTAIL SORT --- Total Iterations: {}".format(countCocktail))
     # continueThings()
     # countQuick = quick_sort(randomList, count, seeSort)
-    # print("QUICKSORT --- Total Iterations: {}".format(countQuick))
+    # print("QUICK SORT --- Total Iterations: {}".format(countQuick))
     # continueThings()
     # countMerge = merge_sort(randomList, count, seeSort)
     # print("MERGE SORT --- Total Iterations: {}".format(countMerge))
+    finished()
 
 if __name__ == "__main__":
     main()

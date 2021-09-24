@@ -2,6 +2,7 @@
 
 import random
 import pygame
+import arcade
 
 class Visualizer():
 
@@ -20,5 +21,7 @@ class Visualizer():
             pygame.draw.rect(self.screen, self.bar_color, pygame.Rect(150+(20*i), check_y, 10, y_extend))
             150, 5-155; 160
             pygame.display.update()
+
+
 
 

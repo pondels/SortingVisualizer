@@ -10,6 +10,22 @@ class Sorters():
         self.sorted = sorted
         self.visualizer = Visualizer()
 
+    def randomize(self):
+        random.shuffle(self.list)
+
+    def time_value(self):
+        length = len(self.list)
+        if length < 5:
+            time.sleep(.5)
+        elif 5 < length <= 15:
+            time.sleep(.15)
+        elif 15 < length <= 30:
+            time.sleep(.075)
+        elif 30 < length <= 50:
+            time.sleep(.025)
+        else:
+            pass
+
     def flip(self, list, smallest_num, ignoreNums, count, seeSort):
 
         indexOfI = list.index(smallest_num)
@@ -24,12 +40,11 @@ class Sorters():
         new_list.reverse()
         count += 1
         new_list = first_values + new_list
-        time.sleep(.05)
+        self.time_value()
         self.visualizer.run_self(new_list)
         return new_list, count
 
     def pancake_sort(self, count):
-        random.shuffle(self.list)
         backup_list = [i for i in self.list]
         sorted_list = [i for i in self.list]
         sorted_list.sort()
@@ -43,7 +58,6 @@ class Sorters():
 
     def radix_sort(self, count):
 
-        random.shuffle(self.list)
         max_length = len(str(max(self.list)))
         items = 0
 
@@ -62,7 +76,7 @@ class Sorters():
                         self.list.insert(items, currentValue)
                         items += 1
                     count += 1
-                    time.sleep(.05)
+                    self.time_value()
                     self.visualizer.run_self(self.list)
                     if self.seeSort:
                         print(self.list)
@@ -78,7 +92,6 @@ class Sorters():
         pass
 
     def insert_sort(self, count):
-        random.shuffle(self.list)
 
         # INSERT SORT CODE CREDIT TO MOHIT KUMRA
         # https://www.geeksforgeeks.org/insertion-sort/
@@ -95,7 +108,7 @@ class Sorters():
                 j -= 1
                 count += 1
             self.list[j + 1] = num
-            time.sleep(.05)
+            self.time_value()
             self.visualizer.run_self(self.list)
 
         return count
@@ -110,7 +123,6 @@ class Sorters():
     def bogo_sort(self, count):
         totalBogo = [[] for _ in range(len(self.list) + 1)]
 
-        random.shuffle(self.list)
         while self.list != self.sorted:
             count += 1
             random.shuffle(self.list)
@@ -127,7 +139,7 @@ class Sorters():
         return count
 
     def bubble_sort(self, count):
-        random.shuffle(self.list)
+
         swapValue = False
         while self.list != self.sorted:
             for i in range(len(self.list)):
@@ -141,7 +153,7 @@ class Sorters():
                     else:
                         swapValue = False
                     count += 1
-                    time.sleep(.05)
+                    self.time_value()
                     self.visualizer.run_self(self.list)
                     if self.seeSort:
                         if swapValue:
@@ -150,15 +162,65 @@ class Sorters():
                             print(self.list, f"\033[92mVALUES CHECKED\033[0m: \033[92m[{self.list[i+1], self.list[i]}]\033[0m \033[95mITERATION\033[0m: \033[92m{count}\033[0m")         
         return count
 
-    def shell_sort(self):
-        shellIntervals = [4, 2, 1]
+    def shell_sort(self, count):
+
+        # CREDIT TO SHUBHAM PRASHAR
+        # https://www.geeksforgeeks.org/shellsort/
+
+        gap = len(self.list) // 2 # initialize the gap
+ 
+        while gap > 0:
+            i = 0
+            j = gap
+            
+            # check the array in from left to right
+            # till the last possible index of j
+            while j < len(self.list):
+        
+                if self.list[i] >self.list[j]:
+                    self.list[i],self.list[j] = self.list[j],self.list[i]
+
+                i += 1
+                j += 1
+            
+                # now, we look back from ith index to the left
+                # we swap the values which are not in the right order.
+                k = i
+                while k - gap > -1:
+    
+                    if self.list[k - gap] > self.list[k]:
+                        self.list[k-gap],self.list[k] = self.list[k],self.list[k-gap]
+                    k -= 1
+                    count += 1
+                self.time_value()
+                self.visualizer.run_self(self.list)
+            gap //= 2
+        return count
+
+    def gnome_sort(self, count):
+
+        # CREDIT TO HARSHIT AGRAWAL
+        # https://www.geeksforgeeks.org/gnome-sort-a-stupid-one/
+
+        index = 0
+        n = len(self.list)
+        while index < n:
+            if index == 0:
+                index = index + 1
+            if self.list[index] >= self.list[index - 1]:
+                index = index + 1
+            else:
+                self.list[index], self.list[index-1] = self.list[index-1], self.list[index]
+                index = index - 1
+                count += 1
+            self.time_value()
+            self.visualizer.run_self(self.list)
+        return count
 
     def heap_sort(self):
         pass
 
     def selection_sort(self, count):
-
-        random.shuffle(self.list)
 
         current_number = ''
         index = 0
@@ -174,10 +236,123 @@ class Sorters():
             self.list.append(current_number)
             current_number = ''
             index += 1
-            time.sleep(.05)
+            self.time_value()
             self.visualizer.run_self(self.list)
             if self.seeSort:
                 print(f"FOUND {current_number} IN INDEX {indexOfI} OF {self.list}")
         if self.seeSort:
             print(f"SORTED LIST: {self.list}")
+        return count
+    def oddEvenSort(self, count):
+
+        # CREDIT FOR SORTER -- MOHIT GUPTA_OMG <(0_o)>
+        # https://www.geeksforgeeks.org/odd-even-sort-brick-sort/
+
+        # Initially array is unsorted
+        n = len(self.list)
+        isSorted = 0
+        while isSorted == 0:
+            isSorted = 1
+            temp = 0
+            for i in range(1, n-1, 2):
+                if self.list[i] > self.list[i+1]:
+                    self.list[i], self.list[i+1] = self.list[i+1], self.list[i]
+                    isSorted = 0
+                    count += 1
+                    self.time_value()
+                    self.visualizer.run_self(self.list)
+                    
+            for i in range(0, n-1, 2):
+                if self.list[i] > self.list[i+1]:
+                    self.list[i], self.list[i+1] = self.list[i+1], self.list[i]
+                    isSorted = 0
+                    count += 1
+                    self.time_value()
+                    self.visualizer.run_self(self.list)
+        return count
+
+    def stoogesort(self, count, l, h):
+        # CREDIT TO -- Mohit Gupta_OMG <(0_o)>
+        # https://www.geeksforgeeks.org/stooge-sort/
+
+        if l >= h:
+            return count
+    
+        # If first element is smaller
+        # than last, swap them
+        if self.list[l]>self.list[h]:
+            count += 1
+            t = self.list[l]
+            self.list[l] = self.list[h]
+            self.list[h] = t
+            self.time_value()
+            self.visualizer.run_self(self.list)
+    
+        # If there are more than 2 elements in
+        # the array
+        if h-l + 1 > 2:
+            t = (int)((h-l + 1)/3)
+    
+            # Recursively sort first 2 / 3 elements
+            self.stoogesort(count, l, (h-t))
+    
+            # Recursively sort last 2 / 3 elements
+            self.stoogesort(count, l + t, (h))
+    
+            # Recursively sort first 2 / 3 elements
+            # again to confirm
+            self.stoogesort(count, l, (h-t))
+        return count
+    
+    def cocktailSort(self, count):
+        # CREDIT TO -- Unknown (Possibly the creators of the site)
+        # https://www.geeksforgeeks.org/cocktail-sort/
+
+        n = len(self.list)
+        swapped = True
+        start = 0
+        end = n-1
+        while (swapped == True):
+    
+            # reset the swapped flag on entering the loop,
+            # because it might be true from a previous
+            # iteration.
+            swapped = False
+    
+            # loop from left to right same as the bubble
+            # sort
+            for i in range(start, end):
+                if (self.list[i] > self.list[i + 1]):
+                    self.list[i], self.list[i + 1] = self.list[i + 1], self.list[i]
+                    swapped = True
+                    self.time_value()
+                    self.visualizer.run_self(self.list)
+                    count += 1
+    
+            # if nothing moved, then array is sorted.
+            if (swapped == False):
+                break
+    
+            # otherwise, reset the swapped flag so that it
+            # can be used in the next stage
+            swapped = False
+    
+            # move the end point back by one, because
+            # item at the end is in its rightful spot
+            end = end-1
+    
+            # from right to left, doing the same
+            # comparison as in the previous stage
+            for i in range(end-1, start-1, -1):
+                if (self.list[i] > self.list[i + 1]):
+                    self.list[i], self.list[i + 1] = self.list[i + 1], self.list[i]
+                    swapped = True
+                    self.time_value()
+                    self.visualizer.run_self(self.list)
+                    count += 1
+    
+            # increase the starting point, because
+            # the last stage would have moved the next
+            # smallest number to its rightful spot.
+            start = start + 1
         return count
