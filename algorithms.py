@@ -6,7 +6,7 @@ import time
 from sorters import Sorters
 from visualizer import Visualizer
 
-numberOfItems = 51
+numberOfItems = 175
 randomList = [i + 1 for i in range(numberOfItems)]
 sortedList = sorted(randomList)
 seeSort = False

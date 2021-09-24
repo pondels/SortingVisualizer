@@ -2,7 +2,8 @@
 
 import random
 import pygame
-import arcade
+import time
+# import arcade
 
 class Visualizer():
 
@@ -18,9 +19,10 @@ class Visualizer():
         for i in range(len(list)):
             check_y = 550 - list[i]*3
             y_extend = list[i]*3
-            pygame.draw.rect(self.screen, self.bar_color, pygame.Rect(150+(20*i), check_y, 10, y_extend))
+            pygame.draw.rect(self.screen, self.bar_color, pygame.Rect(150+(5*i), check_y, 3, y_extend))
             150, 5-155; 160
-            pygame.display.update()
+        pygame.display.update()
+        time.sleep(.01)
 
 
 

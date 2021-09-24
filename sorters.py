@@ -14,17 +14,18 @@ class Sorters():
         random.shuffle(self.list)
 
     def time_value(self):
-        length = len(self.list)
-        if length < 5:
-            time.sleep(.5)
-        elif 5 < length <= 15:
-            time.sleep(.15)
-        elif 15 < length <= 30:
-            time.sleep(.075)
-        elif 30 < length <= 50:
-            time.sleep(.025)
-        else:
-            pass
+        pass
+    #     length = len(self.list)
+    #     if length < 5:
+    #         time.sleep(.5)
+    #     elif 5 < length <= 15:
+    #         time.sleep(.15)
+    #     elif 15 < length <= 30:
+    #         time.sleep(.075)
+    #     elif 30 < length <= 50:
+    #         time.sleep(.025)
+    #     else:
+    #         time.sleep(.025)
 
     def flip(self, list, smallest_num, ignoreNums, count, seeSort):
 
