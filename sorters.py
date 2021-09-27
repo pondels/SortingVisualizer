@@ -151,11 +151,11 @@ class Sorters():
                     if first_value > second_value:
                         self.list[i+1], self.list[i] = self.list[i], self.list[i + 1]
                         swapValue = True
+                        self.time_value()
+                        self.visualizer.run_self(self.list)
                     else:
                         swapValue = False
                     count += 1
-                    self.time_value()
-                    self.visualizer.run_self(self.list)
                     if self.seeSort:
                         if swapValue:
                             print(self.list, f"\033[91mVALUES SWAPPED\033[0m: \033[91m[{self.list[i+1], self.list[i]}]\033[0m \033[95mITERATION\033[0m: \033[92m{count}\033[0m")
