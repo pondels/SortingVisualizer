@@ -28,7 +28,6 @@ class Sorters():
     #         time.sleep(.025)
 
     def flip(self, list, smallest_num, ignoreNums, count, seeSort):
-
         indexOfI = list.index(smallest_num)
         back_list = list[indexOfI:]
         back_list.reverse()
@@ -42,7 +41,7 @@ class Sorters():
         count += 1
         new_list = first_values + new_list
         self.time_value()
-        self.visualizer.run_self(new_list)
+        self.visualizer.run_self(new_list, smallest_num, -1)
         return new_list, count
 
     def pancake_sort(self, count):
@@ -76,9 +75,9 @@ class Sorters():
                         self.list.pop(indexOfI)
                         self.list.insert(items, currentValue)
                         items += 1
+                        self.time_value()
+                        self.visualizer.run_self(self.list, indexOfI, intValue)
                     count += 1
-                    self.time_value()
-                    self.visualizer.run_self(self.list)
                     if self.seeSort:
                         print(self.list)
                 if self.sorted == self.list:
@@ -151,10 +150,10 @@ class Sorters():
                     if first_value > second_value:
                         self.list[i+1], self.list[i] = self.list[i], self.list[i + 1]
                         swapValue = True
-                        self.time_value()
-                        self.visualizer.run_self(self.list)
                     else:
                         swapValue = False
+                    self.time_value()
+                    self.visualizer.run_self(self.list, self.list.index(first_value), self.list.index(second_value))
                     count += 1
                     if self.seeSort:
                         if swapValue:
@@ -215,7 +214,7 @@ class Sorters():
                 index = index - 1
                 count += 1
             self.time_value()
-            self.visualizer.run_self(self.list)
+            self.visualizer.run_self(self.list, index, index+1)
         return count
 
     def heap_sort(self):
@@ -232,18 +231,21 @@ class Sorters():
                 if self.list[i] < current_number:
                     current_number = self.list[i]
                 count += 1
+                self.time_value()
+                self.visualizer.run_self(self.list, self.list.index(current_number), i)
             indexOfI = self.list.index(current_number)
             self.list.pop(indexOfI)
             self.list.append(current_number)
+            self.time_value()
+            self.visualizer.run_self(self.list, self.list.index(current_number), -1)
             current_number = ''
             index += 1
-            self.time_value()
-            self.visualizer.run_self(self.list)
             if self.seeSort:
                 print(f"FOUND {current_number} IN INDEX {indexOfI} OF {self.list}")
         if self.seeSort:
             print(f"SORTED LIST: {self.list}")
         return count
+
     def oddEvenSort(self, count):
 
         # CREDIT FOR SORTER -- MOHIT GUPTA_OMG <(0_o)>
@@ -261,7 +263,7 @@ class Sorters():
                     isSorted = 0
                     count += 1
                     self.time_value()
-                    self.visualizer.run_self(self.list)
+                    self.visualizer.run_self(self.list, i, i+1)
                     
             for i in range(0, n-1, 2):
                 if self.list[i] > self.list[i+1]:
@@ -269,7 +271,7 @@ class Sorters():
                     isSorted = 0
                     count += 1
                     self.time_value()
-                    self.visualizer.run_self(self.list)
+                    self.visualizer.run_self(self.list, i, i+1)
         return count
 
     def stoogesort(self, count, l, h):
@@ -327,7 +329,7 @@ class Sorters():
                     self.list[i], self.list[i + 1] = self.list[i + 1], self.list[i]
                     swapped = True
                     self.time_value()
-                    self.visualizer.run_self(self.list)
+                    self.visualizer.run_self(self.list, i, i+1)
                     count += 1
     
             # if nothing moved, then array is sorted.
@@ -349,7 +351,7 @@ class Sorters():
                     self.list[i], self.list[i + 1] = self.list[i + 1], self.list[i]
                     swapped = True
                     self.time_value()
-                    self.visualizer.run_self(self.list)
+                    self.visualizer.run_self(self.list, i, i+1)
                     count += 1
     
             # increase the starting point, because

@@ -17,11 +17,15 @@ class Visualizer():
         self.screen = pygame.display.set_mode((HEIGHT, WIDTH))
         self.bar_color = (255, 0, 0)
     
-    def run_self(self, list):
+    def run_self(self, list, itemOne, itemTwo):
         self.screen.fill((0, 0, 0))
         for i in range(len(list)):
             check_y = 650 - list[i]*3
             y_extend = list[i]*3
+            if i == itemOne or i == itemTwo:
+                self.bar_color = (0, 255, 0)
+            else:
+                self.bar_color = (255, 0, 0)
             pygame.draw.rect(self.screen, self.bar_color, pygame.Rect(150+(5*i), check_y, 3, y_extend))
             # textsurface = self.font.render(sortingAlg, False, (255, 255, 255))
         pygame.display.update()
