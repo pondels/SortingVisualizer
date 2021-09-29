@@ -22,13 +22,11 @@ def finished():
     time.sleep(10)
 
 def main():
+    global sorter
+    global randomList
     continueThings()
     countBubble = sorter.bubble_sort(0)
     print("BUBBLE SORT --- Total Iterations: {}".format(countBubble))
-    if numberOfItems <= 8:
-        continueThings()
-        countBogo = sorter.bogo_sort(0)
-        print("BOGO SORT --- Total Iterations: {}".format(countBogo))
     continueThings()
     countInsert = sorter.insert_sort(0)
     print("INSERT SORT --- Total Iterations: {}".format(countInsert))
@@ -56,6 +54,9 @@ def main():
     continueThings()
     countCocktail = sorter.cocktailSort(0)
     print("COCKTAIL SORT --- Total Iterations: {}".format(countCocktail))
+    continueThings()
+    countBogo = sorter.bogo_sort(0)
+    print("BOGO SORT --- Total Iterations: {}".format(countBogo))
     finished()
 
 if __name__ == "__main__":

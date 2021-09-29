@@ -131,22 +131,24 @@ class Sorters():
         # totalBogo is a list of lists that appends a number
         # of items to check how many times it had x amount
         # of numbers correct when it randomized
-
+        new_list = [i for i in range(8)]
+        random.shuffle(new_list)
         totalBogo = [[] for _ in range(len(self.list) + 1)]
 
         # Runs while the list isn't sorted
-        while self.list != self.sorted:
+        self.sorted = [i for i in range(8)]
+        while new_list != self.sorted:
             count += 1
             # Shuffles the list
-            self.randomize()
+            random.shuffle(new_list)
             # Runs the new list into the checkForCorrectBogo
             # And then appends an item to the totalBogo
             # to the index value where the number
             # of items that were correct
-            amount = self.checkForCorrectBogo(self.list)
+            amount = self.checkForCorrectBogo(new_list)
             totalBogo[amount].append("")
             # Visualizes the list being 'sorted'
-            self.visualizer.run_self(self.list, -1, None, True, "Bogo Sort", count)
+            self.visualizer.run_self(new_list, -1, None, True, "Bogo Sort", count)
 
         if self.seeSort:
             totalLoops = -1
@@ -238,7 +240,7 @@ class Sorters():
             else:
                 self.list[index], self.list[index-1] = self.list[index-1], self.list[index]
                 index = index - 1
-                count += 1
+            count += 1
             self.speedUpCount += 1
             if self.speedUpCount >= 20:
                 self.visualizer.run_self(self.list, index, index+1, self.speedUp, "Gnome Sort", count)
@@ -257,6 +259,10 @@ class Sorters():
                     current_number = self.list[i]
                 if self.list[i] < current_number:
                     current_number = self.list[i]
+                self.speedUpCount += 1
+                if self.speedUpCount >= 50:
+                    self.visualizer.run_self(self.list, self.list.index(current_number), i, self.speedUp, "Selection Sort", count)
+                else:
                     self.visualizer.run_self(self.list, self.list.index(current_number), i, False, "Selection Sort", count)
                 count += 1
             indexOfI = self.list.index(current_number)
