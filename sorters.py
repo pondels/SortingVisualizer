@@ -28,6 +28,8 @@ class Sorters():
     #         time.sleep(.025)
 
     def flip(self, list, smallest_num, ignoreNums, count, seeSort):
+        self.time_value()
+        self.visualizer.run_self(self.list, list, -1)
         indexOfI = list.index(smallest_num)
         back_list = list[indexOfI:]
         back_list.reverse()
@@ -75,9 +77,9 @@ class Sorters():
                         self.list.pop(indexOfI)
                         self.list.insert(items, currentValue)
                         items += 1
-                        self.time_value()
-                        self.visualizer.run_self(self.list, indexOfI, intValue)
                     count += 1
+                    self.time_value()
+                    self.visualizer.run_self(self.list, indexOfI, -1)
                     if self.seeSort:
                         print(self.list)
                 if self.sorted == self.list:
@@ -107,9 +109,12 @@ class Sorters():
                 self.list[j + 1] = self.list[j]
                 j -= 1
                 count += 1
+                self.time_value()
+                self.visualizer.run_self(self.list, j, i)
             self.list[j + 1] = num
-            self.time_value()
-            self.visualizer.run_self(self.list)
+
+        self.time_value()
+        self.visualizer.run_self(self.list, j, i)
 
         return count
 
@@ -193,7 +198,7 @@ class Sorters():
                     k -= 1
                     count += 1
                 self.time_value()
-                self.visualizer.run_self(self.list)
+                self.visualizer.run_self(self.list, j, i)
             gap //= 2
         return count
 
@@ -289,8 +294,7 @@ class Sorters():
             self.list[l] = self.list[h]
             self.list[h] = t
             self.time_value()
-            self.visualizer.run_self(self.list)
-    
+            self.visualizer.run_self(self.list, l, h)
         # If there are more than 2 elements in
         # the array
         if h-l + 1 > 2:
