@@ -5,31 +5,28 @@ import time
 class Sorters():
 
     def __init__(self, list, sorted, seeSort):
+
+        '''
+        INITIALIZED BASIC INFORMATION FOR THE SORTING
+        ALGORITHMS TO FUNCTION PROPERLY
+        '''
+
         self.seeSort = seeSort
         self.list = list
         self.sorted = sorted
         self.visualizer = Visualizer()
+        self.speedUp = True
+        self.speedUpCount = 0
 
     def randomize(self):
+        '''
+        Called whenever a new sorter is called so that 
+        the list is for sure the most random
+        it can be.
+        '''
         random.shuffle(self.list)
 
-    def time_value(self):
-        pass
-    #     length = len(self.list)
-    #     if length < 5:
-    #         time.sleep(.5)
-    #     elif 5 < length <= 15:
-    #         time.sleep(.15)
-    #     elif 15 < length <= 30:
-    #         time.sleep(.075)
-    #     elif 30 < length <= 50:
-    #         time.sleep(.025)
-    #     else:
-    #         time.sleep(.025)
-
     def flip(self, list, smallest_num, ignoreNums, count, seeSort):
-        self.time_value()
-        self.visualizer.run_self(self.list, list, -1)
         indexOfI = list.index(smallest_num)
         back_list = list[indexOfI:]
         back_list.reverse()
@@ -42,8 +39,7 @@ class Sorters():
         new_list.reverse()
         count += 1
         new_list = first_values + new_list
-        self.time_value()
-        self.visualizer.run_self(new_list, smallest_num, -1)
+        self.visualizer.run_self(new_list, smallest_num, smallest_num, False, "Pancake Sort", count)
         return new_list, count
 
     def pancake_sort(self, count):
@@ -78,20 +74,18 @@ class Sorters():
                         self.list.insert(items, currentValue)
                         items += 1
                     count += 1
-                    self.time_value()
-                    self.visualizer.run_self(self.list, indexOfI, -1)
+                    self.speedUpCount += 1
+                    if self.speedUpCount >= 20:
+                        self.visualizer.run_self(self.list, indexOfI, -1, self.speedUp, "RadixSort", count)
+                    else:
+                        self.visualizer.run_self(self.list, indexOfI, -1, False, "Radix Sort", count)
                     if self.seeSort:
                         print(self.list)
                 if self.sorted == self.list:
                     break
             items = 0
+        self.speedUpCount = 0
         return count
-
-    def merge_sort(self):
-        pass
-
-    def quick_sort(self):
-        pass
 
     def insert_sort(self, count):
 
@@ -109,32 +103,50 @@ class Sorters():
                 self.list[j + 1] = self.list[j]
                 j -= 1
                 count += 1
-                self.time_value()
-                self.visualizer.run_self(self.list, j, i)
+                self.visualizer.run_self(self.list, j, i, False, "Insert Sort", count)
             self.list[j + 1] = num
-
-        self.time_value()
-        self.visualizer.run_self(self.list, j, i)
+        self.visualizer.run_self(self.list, j, i, False, "Insert Sort", count)
 
         return count
 
     def checkForCorrectBogo(self, list):
+
+        '''
+        Total Amount checks for the amount of numbers that
+        were in the correct spot
+        '''
+
         totalAmount = 0
+
+
         for i in range(len(list)):
+            # Goes through the list and checks for a correct item
+            # Compared to the sorted list
             if self.sorted[i] == list[i]:
                 totalAmount += 1
         return totalAmount
 
     def bogo_sort(self, count):
+
+        # totalBogo is a list of lists that appends a number
+        # of items to check how many times it had x amount
+        # of numbers correct when it randomized
+
         totalBogo = [[] for _ in range(len(self.list) + 1)]
 
+        # Runs while the list isn't sorted
         while self.list != self.sorted:
             count += 1
-            random.shuffle(self.list)
-
+            # Shuffles the list
+            self.randomize()
+            # Runs the new list into the checkForCorrectBogo
+            # And then appends an item to the totalBogo
+            # to the index value where the number
+            # of items that were correct
             amount = self.checkForCorrectBogo(self.list)
             totalBogo[amount].append("")
-            self.visualizer.run_self(self.list)
+            # Visualizes the list being 'sorted'
+            self.visualizer.run_self(self.list, -1, None, True, "Bogo Sort", count)
 
         if self.seeSort:
             totalLoops = -1
@@ -157,14 +169,18 @@ class Sorters():
                         swapValue = True
                     else:
                         swapValue = False
-                    self.time_value()
-                    self.visualizer.run_self(self.list, self.list.index(first_value), self.list.index(second_value))
+                    self.speedUpCount += 1
+                    if self.speedUpCount >= 20:
+                        self.visualizer.run_self(self.list, self.list.index(first_value), self.list.index(second_value), self.speedUp, "Bubble Sort", count)
+                    else:
+                        self.visualizer.run_self(self.list, self.list.index(first_value), self.list.index(second_value), False, "Bubble Sort", count)
                     count += 1
                     if self.seeSort:
                         if swapValue:
                             print(self.list, f"\033[91mVALUES SWAPPED\033[0m: \033[91m[{self.list[i+1], self.list[i]}]\033[0m \033[95mITERATION\033[0m: \033[92m{count}\033[0m")
                         else:
                             print(self.list, f"\033[92mVALUES CHECKED\033[0m: \033[92m[{self.list[i+1], self.list[i]}]\033[0m \033[95mITERATION\033[0m: \033[92m{count}\033[0m")         
+        self.speedUpCount = 0
         return count
 
     def shell_sort(self, count):
@@ -184,6 +200,7 @@ class Sorters():
         
                 if self.list[i] >self.list[j]:
                     self.list[i],self.list[j] = self.list[j],self.list[i]
+                    count += 1
 
                 i += 1
                 j += 1
@@ -195,11 +212,15 @@ class Sorters():
     
                     if self.list[k - gap] > self.list[k]:
                         self.list[k-gap],self.list[k] = self.list[k],self.list[k-gap]
+                        count += 1
                     k -= 1
-                    count += 1
-                self.time_value()
-                self.visualizer.run_self(self.list, j, i)
+                self.speedUpCount += 1
+                if self.speedUpCount >= 20:
+                    self.visualizer.run_self(self.list, j, i, self.speedUp, "Shell Sort", count)    
+                else:
+                    self.visualizer.run_self(self.list, j, i, False, "Shell Sort", count)
             gap //= 2
+        self.speedUpCount = 0
         return count
 
     def gnome_sort(self, count):
@@ -218,12 +239,13 @@ class Sorters():
                 self.list[index], self.list[index-1] = self.list[index-1], self.list[index]
                 index = index - 1
                 count += 1
-            self.time_value()
-            self.visualizer.run_self(self.list, index, index+1)
+            self.speedUpCount += 1
+            if self.speedUpCount >= 20:
+                self.visualizer.run_self(self.list, index, index+1, self.speedUp, "Gnome Sort", count)
+            else:
+                self.visualizer.run_self(self.list, index, index+1, False, "Gnome Sort", count)
+        self.speedUpCount = 0
         return count
-
-    def heap_sort(self):
-        pass
 
     def selection_sort(self, count):
 
@@ -235,20 +257,23 @@ class Sorters():
                     current_number = self.list[i]
                 if self.list[i] < current_number:
                     current_number = self.list[i]
+                    self.visualizer.run_self(self.list, self.list.index(current_number), i, False, "Selection Sort", count)
                 count += 1
-                self.time_value()
-                self.visualizer.run_self(self.list, self.list.index(current_number), i)
             indexOfI = self.list.index(current_number)
             self.list.pop(indexOfI)
             self.list.append(current_number)
-            self.time_value()
-            self.visualizer.run_self(self.list, self.list.index(current_number), -1)
+            self.speedUpCount += 1
+            if self.speedUpCount >= 20:
+                self.visualizer.run_self(self.list, self.list.index(current_number), -1, self.speedUp, "Selection Sort", count)
+            else:
+                self.visualizer.run_self(self.list, self.list.index(current_number), -1, False, "Selection Sort", count)
             current_number = ''
             index += 1
             if self.seeSort:
                 print(f"FOUND {current_number} IN INDEX {indexOfI} OF {self.list}")
         if self.seeSort:
             print(f"SORTED LIST: {self.list}")
+        self.speedUpCount = 0
         return count
 
     def oddEvenSort(self, count):
@@ -267,16 +292,23 @@ class Sorters():
                     self.list[i], self.list[i+1] = self.list[i+1], self.list[i]
                     isSorted = 0
                     count += 1
-                    self.time_value()
-                    self.visualizer.run_self(self.list, i, i+1)
+                    self.speedUpCount += 1
+                    if self.speedUpCount >= 20:
+                        self.visualizer.run_self(self.list, i, i+1, self.speedUp, "OddEven Sort", count)
+                    else:
+                        self.visualizer.run_self(self.list, i, i+1, False, "OddEven Sort", count)
                     
             for i in range(0, n-1, 2):
                 if self.list[i] > self.list[i+1]:
                     self.list[i], self.list[i+1] = self.list[i+1], self.list[i]
                     isSorted = 0
                     count += 1
-                    self.time_value()
-                    self.visualizer.run_self(self.list, i, i+1)
+                    self.speedUpCount += 1
+                    if self.speedUpCount >= 20:
+                        self.visualizer.run_self(self.list, i, i+1, self.speedUp, "OddEven Sort", count)
+                    else:
+                        self.visualizer.run_self(self.list, i, i+1, False, "OddEven Sort", count)
+        self.speedUpCount = 0
         return count
 
     def stoogesort(self, count, l, h):
@@ -293,8 +325,11 @@ class Sorters():
             t = self.list[l]
             self.list[l] = self.list[h]
             self.list[h] = t
-            self.time_value()
-            self.visualizer.run_self(self.list, l, h)
+            self.speedUpCount += 1
+            if self.speedUpCount >= 20:
+                self.visualizer.run_self(self.list, l, h, self.speedUp, "Stooge Sort", count)
+            else:
+                self.visualizer.run_self(self.list, l, h, False, "Stooge Sort", count)
         # If there are more than 2 elements in
         # the array
         if h-l + 1 > 2:
@@ -309,6 +344,7 @@ class Sorters():
             # Recursively sort first 2 / 3 elements
             # again to confirm
             self.stoogesort(count, l, (h-t))
+        self.speedUpCount = 0
         return count
     
     def cocktailSort(self, count):
@@ -332,8 +368,11 @@ class Sorters():
                 if (self.list[i] > self.list[i + 1]):
                     self.list[i], self.list[i + 1] = self.list[i + 1], self.list[i]
                     swapped = True
-                    self.time_value()
-                    self.visualizer.run_self(self.list, i, i+1)
+                    self.speedUpCount += 1
+                    if self.speedUpCount >= 20:
+                        self.visualizer.run_self(self.list, i, i+1, self.speedUp, "Cocktail Sort", count)
+                    else:
+                        self.visualizer.run_self(self.list, i, i+1, False, "Cocktail Sort", count)
                     count += 1
     
             # if nothing moved, then array is sorted.
@@ -354,12 +393,16 @@ class Sorters():
                 if (self.list[i] > self.list[i + 1]):
                     self.list[i], self.list[i + 1] = self.list[i + 1], self.list[i]
                     swapped = True
-                    self.time_value()
-                    self.visualizer.run_self(self.list, i, i+1)
+                    self.speedUpCount += 1
+                    if self.speedUpCount >= 20:
+                        self.visualizer.run_self(self.list, i, i+1, self.speedUp, "Cocktail Sort", count)
+                    else:
+                        self.visualizer.run_self(self.list, i, i+1, False, "Cocktail Sort", count)
                     count += 1
     
             # increase the starting point, because
             # the last stage would have moved the next
             # smallest number to its rightful spot.
             start = start + 1
+        self.speedUpCount = 0
         return count

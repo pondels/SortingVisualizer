@@ -6,7 +6,7 @@ import time
 from sorters import Sorters
 from visualizer import Visualizer
 
-numberOfItems = 100
+numberOfItems = 35
 randomList = [i + 1 for i in range(numberOfItems)]
 sortedList = sorted(randomList)
 seeSort = False
@@ -35,9 +35,9 @@ def main():
     continueThings()
     countSelection = sorter.selection_sort(0)
     print("SELECTION SORT --- Total Iterations: {}".format(countSelection))
-    # continueThings()
-    # countPancake = sorter.pancake_sort(0)
-    # print("PANCAKE SORT --- Total Iterations: {}".format(countPancake))
+    continueThings()
+    countPancake = sorter.pancake_sort(0)
+    print("PANCAKE SORT --- Total Iterations: {}".format(countPancake))
     continueThings()
     countRadix = sorter.radix_sort(0)
     print("RADIX SORT --- Total Iterations: {}".format(countRadix))

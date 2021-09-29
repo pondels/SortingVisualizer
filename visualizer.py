@@ -3,6 +3,7 @@
 
 import random
 import pygame
+from pygame.locals import *
 import time
 # import arcade
 
@@ -14,20 +15,34 @@ class Visualizer():
         HEIGHT = 1280
         self.screen = pygame.display.set_mode((HEIGHT, WIDTH))
         self.bar_color = (255, 0, 0)
-    
-    def run_self(self, list, itemOne, itemTwo):
+        pygame.init()
+
+    def time_buffer(self, variable):
+        if variable == 'slow':
+            time.sleep(.1)
+        elif variable == 'fast':
+            time.sleep(.01)
+
+    def run_self(self, list, itemOne, itemTwo, speedUp, nameOfAlg, count):
+        if itemTwo != None and not speedUp:
+            self.time_buffer("slow")
+        else:
+            self.time_buffer("fast")
         self.screen.fill((0, 0, 0))
         for i in range(len(list)):
-            check_y = 650 - list[i]*4
-            y_extend = list[i]*4
+            check_y = 700 - list[i]*10
+            y_extend = list[i]*10
             if i == itemOne or i == itemTwo:
                 self.bar_color = (0, 255, 0)
             else:
                 self.bar_color = (255, 0, 0)
-            pygame.draw.rect(self.screen, self.bar_color, pygame.Rect(150+(9*i), check_y, 7, y_extend))
+            
+            font1 = pygame.font.SysFont('chalkduster.ttf', 72)
+            img1 = font1.render(f"{nameOfAlg}: " + f"{count}", True, (0, 255, 0))
+            self.screen.blit(img1, (20, 20))
+            pygame.draw.rect(self.screen, self.bar_color, pygame.Rect(100+(30*i), check_y, 25, y_extend))
             # textsurface = self.font.render(sortingAlg, False, (255, 255, 255))
         pygame.display.update()
-        time.sleep(.01)
 
 
 
