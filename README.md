@@ -8,16 +8,16 @@
 
 #### These sorting algorithms include:
 - [Bubble Sort](https://www.geeksforgeeks.org/bubble-sort/)
-- [Insert Sort](https://www.geeksforgeeks.org/insertion-sort/)
-- [Selection Sort](https://www.geeksforgeeks.org/selection-sort/)
-- [Radix Sort](https://www.geeksforgeeks.org/radix-sort/)
-- [Shell Sort](https://www.geeksforgeeks.org/shellsort/)
-- [Stooge Sort](https://www.geeksforgeeks.org/stooge-sort/)
+- [Bogo Sort](https://www.geeksforgeeks.org/bogosort-permutation-sort/)
 - [Cocktail Sort](https://www.geeksforgeeks.org/cocktail-sort/)
 - [Gnome Sort](https://www.geeksforgeeks.org/gnome-sort-a-stupid-one/)
-- [Bogo Sort](https://www.geeksforgeeks.org/bogosort-permutation-sort/)
+- [Insert Sort](https://www.geeksforgeeks.org/insertion-sort/)
 - [Odd-Even Sort](https://www.geeksforgeeks.org/odd-even-sort-brick-sort/)
 - [Pancake Sort](https://www.geeksforgeeks.org/pancake-sorting/)
+- [Radix Sort](https://www.geeksforgeeks.org/radix-sort/)
+- [Selection Sort](https://www.geeksforgeeks.org/selection-sort/)
+- [Shell Sort](https://www.geeksforgeeks.org/shellsort/)
+- [Stooge Sort](https://www.geeksforgeeks.org/stooge-sort/)
 ---
 ## Each Algorithm will be shown on screen with a total of 35 items, while bogo has 8 items.
 #### (read more on [bogo sort](https://www.geeksforgeeks.org/bogosort-permutation-sort/))
@@ -39,12 +39,13 @@
 
 # Sources Cited
 - [Geeks For Geeks - Sorting Algorithms](https://www.geeksforgeeks.org/sorting-algorithms/)
-- [Pygame Text](https://stackoverflow.com/questions/20842801/how-to-display-text-in-pygame)
 - [Pygame Screen](https://www.codegrepper.com/code-examples/python/how+to+make+a+screen+in+python)
-## Code Used For Algorithms (Cited in Code)
-- [Shell Sort](https://www.w3resource.com/ODSA/AV/Sorting/shellsortAV.html)
-- [Insert Sort](https://www.geeksforgeeks.org/insertion-sort/)
-- [Gnome Sort](https://www.geeksforgeeks.org/gnome-sort-a-stupid-one/)
-- [Odd-Even Sort](https://www.geeksforgeeks.org/odd-even-sort-brick-sort/)
-- [Stooge Sort](https://www.geeksforgeeks.org/stooge-sort/)
+- [Pygame Text](https://stackoverflow.com/questions/20842801/how-to-display-text-in-pygame)
+
+# Code Used For Algorithms (Cited in Code)
 - [Cocktail Sort](https://www.geeksforgeeks.org/cocktail-sort/)
+- [Gnome Sort](https://www.geeksforgeeks.org/gnome-sort-a-stupid-one/)
+- [Insert Sort](https://www.geeksforgeeks.org/insertion-sort/)
+- [Odd-Even Sort](https://www.geeksforgeeks.org/odd-even-sort-brick-sort/)
+- [Shell Sort](https://www.w3resource.com/ODSA/AV/Sorting/shellsortAV.html)
+- [Stooge Sort](https://www.geeksforgeeks.org/stooge-sort/)
