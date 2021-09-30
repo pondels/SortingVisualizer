@@ -5,22 +5,32 @@ import time
 from sorters import Sorters
 from visualizer import Visualizer
 
+# Number of items = items in the list
+
 numberOfItems = 35
 randomList = [i + 1 for i in range(numberOfItems)]
 sortedList = sorted(randomList)
+# SeeSort is just for the terminal. Don't put True unless you want a seizure
 seeSort = False
 
 visualizer = Visualizer()
 sorter = Sorters(randomList, sortedList, seeSort)
 
 def continueThings():
+
+    # Causes a time buffer and then randomizes the local list
+    # for the algorithm to sort
     time.sleep(2)
     sorter.randomize()
 
 def finished():
+    # Runs whenever the program is complete
     time.sleep(10)
 
 def main():
+
+    # Runs continue Things and then triggers the sorting algorithm
+
     continueThings()
     sorter.bubble_sort(0)
     continueThings()

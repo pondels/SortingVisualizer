@@ -10,6 +10,11 @@ import time
 class Visualizer():
 
     def __init__(self):
+
+        '''
+            Defines the Screen and initializes pygame for the text
+        '''
+
         self.run = True
         WIDTH = 720
         HEIGHT = 1280
@@ -18,20 +23,32 @@ class Visualizer():
         pygame.init()
 
     def time_buffer(self, variable):
+        # Checks if there is a slowdown buffer to determine how slow the graph runs
+
         if variable == 'slow':
             time.sleep(.1)
         elif variable == 'fast':
             time.sleep(.01)
 
     def run_self(self, list, itemOne, itemTwo, speedUp, nameOfAlg, count):
+
+        # Runs the buffer
         if itemTwo != None and not speedUp:
             self.time_buffer("slow")
         else:
             self.time_buffer("fast")
+        
+        # 'resets' the screen
         self.screen.fill((0, 0, 0))
+
+        # Draws the new graph for every item checked or moved
         for i in range(len(list)):
             check_y = 700 - list[i]*10
             y_extend = list[i]*10
+            
+            # Changes the bar color to green if the items being checked
+            # are found in the list
+
             if i == itemOne or i == itemTwo:
                 self.bar_color = (0, 255, 0)
             else:

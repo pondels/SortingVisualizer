@@ -10,7 +10,6 @@ class Sorters():
         INITIALIZED BASIC INFORMATION FOR THE SORTING
         ALGORITHMS TO FUNCTION PROPERLY
         '''
-
         self.seeSort = seeSort
         self.list = list
         self.sorted = sorted
@@ -27,17 +26,27 @@ class Sorters():
         random.shuffle(self.list)
 
     def flip(self, list, smallest_num, ignoreNums, count, seeSort):
+        # Triggered every time the list needs to be flipped
+        
+        
+        # Finds the next smallest item and splits the list into 2 parts
         indexOfI = list.index(smallest_num)
         back_list = list[indexOfI:]
+
+        # Reverses that part of the list and sticks it back with the front list, appending to the new_list
         back_list.reverse()
         count += 1
         front_list = list[:indexOfI]
         new_list = front_list + back_list
+
+        # Reinitializes values for the list and reverses the new list
         first_values, new_list = new_list[:len(list) - ignoreNums], new_list[len(list) - ignoreNums:]
         if seeSort:
             print(first_values + new_list)
         new_list.reverse()
         count += 1
+
+        # New list updated with repositioned value
         new_list = first_values + new_list
         self.visualizer.run_self(new_list, smallest_num, smallest_num, False, "Pancake Sort", count)
         return new_list, count
@@ -46,11 +55,17 @@ class Sorters():
         backup_list = [i for i in self.list]
         sorted_list = [i for i in self.list]
         sorted_list.sort()
+
+        # Continues running until the list is sorted
         while self.list != sorted_list:
+            # Finds the smallest value
             smallest_num = min(backup_list)
             self.list, count = self.flip(self.list, smallest_num, len(backup_list), count, self.seeSort)
             if self.seeSort:
                 print(self.list)
+
+            # Pops the smallest number so the program knows what number to look for next
+            # (dirty trick I know...)
             backup_list.pop(backup_list.index(smallest_num))
         return count
 
@@ -59,22 +74,35 @@ class Sorters():
         max_length = len(str(max(self.list)))
         items = 0
 
+        # Runs from 1 to the length of the list + 1
+        # Then runs from 0 - 9 checking each individual integer for sorting
+        # Then runs through the entire list
+
         for n in range(1, max_length + 1):
             for num in range(10):
                 for i in range(len(self.list)):
+                    # Finds the values of the current item
                     intValue = len(str(self.list[i])) - n
                     indexOfI = self.list.index(self.list[i])
                     currentValue = self.list[indexOfI]
+
+                    # Checks to see if the value has more numbers in front of it
                     if intValue > -1:
                         checkValue = int(str(self.list[i])[intValue])
                     else:
+                        # This is usually if it's checking a number like 20 and 9 and 9 only has 1 digit whereas 20 has 2,
+                        # so 9 would return 0 because it's checking 20, 09 and 9 is a 0
                         checkValue = 0
+
                     if checkValue == num:
+                        # Found the next smallest number so it pops it and inserts it into the new position
                         self.list.pop(indexOfI)
                         self.list.insert(items, currentValue)
                         items += 1
                     count += 1
                     self.speedUpCount += 1
+
+                    # Visuals
                     if self.speedUpCount >= 20:
                         self.visualizer.run_self(self.list, indexOfI, -1, self.speedUp, "RadixSort", count)
                     else:
@@ -160,13 +188,21 @@ class Sorters():
     def bubble_sort(self, count):
 
         swapValue = False
+
+        # Runs while it's not sorted
         while self.list != self.sorted:
+            # Runs for the number of items in the list to check everything
             for i in range(len(self.list)):
+                
+                # Fail safe
                 if i + 1 == len(self.list):
                     break
                 else:
+                    # Checks the values it's comparing
                     first_value, second_value = self.list[i], self.list[i + 1]
+
                     if first_value > second_value:
+                        # Swaps the values if the left item is greater than the right
                         self.list[i+1], self.list[i] = self.list[i], self.list[i + 1]
                         swapValue = True
                     else:
