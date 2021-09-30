@@ -131,7 +131,11 @@ class Sorters():
                 self.list[j + 1] = self.list[j]
                 j -= 1
                 count += 1
-                self.visualizer.run_self(self.list, j, i, False, "Insert Sort", count)
+                self.speedUpCount += 1
+                if self.speedUpCount >= 20:
+                    self.visualizer.run_self(self.list, j, i, self.speedUp, "Insert Sort", count)
+                else:
+                    self.visualizer.run_self(self.list, j, i, False, "Insert Sort", count)
             self.list[j + 1] = num
         self.visualizer.run_self(self.list, j, i, False, "Insert Sort", count)
 
@@ -238,8 +242,8 @@ class Sorters():
         
                 if self.list[i] >self.list[j]:
                     self.list[i],self.list[j] = self.list[j],self.list[i]
-                    count += 1
-
+                
+                count += 1
                 i += 1
                 j += 1
             
@@ -249,7 +253,7 @@ class Sorters():
                 while k - gap > -1:
     
                     if self.list[k - gap] > self.list[k]:
-                        self.list[k-gap],self.list[k] = self.list[k],self.list[k-gap]
+                        self.list[k-gap], self.list[k] = self.list[k], self.list[k-gap]
                         count += 1
                     k -= 1
                 self.speedUpCount += 1
@@ -353,7 +357,7 @@ class Sorters():
         self.speedUpCount = 0
         return count
 
-    def stoogesort(self, count, l, h):
+    def stoogesort(self, l, h, count):
         # CREDIT TO -- Mohit Gupta_OMG <(0_o)>
         # https://www.geeksforgeeks.org/stooge-sort/
 
@@ -363,30 +367,34 @@ class Sorters():
         # If first element is smaller
         # than last, swap them
         if self.list[l]>self.list[h]:
-            count += 1
             t = self.list[l]
             self.list[l] = self.list[h]
             self.list[h] = t
             self.speedUpCount += 1
-            if self.speedUpCount >= 20:
+            if self.speedUpCount >= 50:
                 self.visualizer.run_self(self.list, l, h, self.speedUp, "Stooge Sort", count)
             else:
                 self.visualizer.run_self(self.list, l, h, False, "Stooge Sort", count)
+        count += 1
+        # self.speedUpCount += 1
+        # if self.speedUpCount >= 50:
+        #     self.visualizer.run_self(self.list, l, h, self.speedUp, "Stooge Sort", count)
+        # else:
+        #     self.visualizer.run_self(self.list, l, h, False, "Stooge Sort", count)
         # If there are more than 2 elements in
         # the array
         if h-l + 1 > 2:
             t = (int)((h-l + 1)/3)
     
             # Recursively sort first 2 / 3 elements
-            self.stoogesort(count, l, (h-t))
+            count = self.stoogesort(l, (h-t), count)
     
             # Recursively sort last 2 / 3 elements
-            self.stoogesort(count, l + t, (h))
+            count = self.stoogesort(l + t, (h), count)
     
             # Recursively sort first 2 / 3 elements
             # again to confirm
-            self.stoogesort(count, l, (h-t))
-        self.speedUpCount = 0
+            count = self.stoogesort(l, (h-t), count)
         return count
     
     def cocktailSort(self, count):

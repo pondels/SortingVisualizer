@@ -48,7 +48,7 @@ def main():
     continueThings()
     sorter.oddEvenSort(0)
     continueThings()
-    sorter.stoogesort(0, 0, len(randomList) - 1)
+    sorter.stoogesort(0, len(randomList) - 1, 0)
     continueThings()
     sorter.cocktailSort(0)
     continueThings()

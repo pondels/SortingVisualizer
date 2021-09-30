@@ -28,7 +28,7 @@ class Visualizer():
         if variable == 'slow':
             time.sleep(.1)
         elif variable == 'fast':
-            time.sleep(.01)
+            pass
 
     def run_self(self, list, itemOne, itemTwo, speedUp, nameOfAlg, count):
 
