@@ -1,7 +1,6 @@
 # https://www.geeksforgeeks.org/sorting-algorithms/
 # https://www.w3resource.com/ODSA/AV/Sorting/shellsortAV.html
 
-import random
 import time
 from sorters import Sorters
 from visualizer import Visualizer
@@ -23,38 +22,27 @@ def finished():
 
 def main():
     continueThings()
-    countBubble = sorter.bubble_sort(0)
-    print("BUBBLE SORT --- Total Iterations: {}".format(countBubble))
+    sorter.bubble_sort(0)
     continueThings()
-    countInsert = sorter.insert_sort(0)
-    print("INSERT SORT --- Total Iterations: {}".format(countInsert))
+    sorter.insert_sort(0)
     continueThings()
-    countSelection = sorter.selection_sort(0)
-    print("SELECTION SORT --- Total Iterations: {}".format(countSelection))
+    sorter.selection_sort(0)
     continueThings()
-    countPancake = sorter.pancake_sort(0)
-    print("PANCAKE SORT --- Total Iterations: {}".format(countPancake))
+    sorter.pancake_sort(0)
     continueThings()
-    countRadix = sorter.radix_sort(0)
-    print("RADIX SORT --- Total Iterations: {}".format(countRadix))
+    sorter.radix_sort(0)
     continueThings()
-    countGnome = sorter.gnome_sort(0)
-    print("GNOME SORT --- Total Iterations: {}".format(countGnome))
+    sorter.gnome_sort(0)
     continueThings()
-    countShell = sorter.shell_sort(0)
-    print("SHELL SORT --- Total Iterations: {}".format(countShell))
+    sorter.shell_sort(0)
     continueThings()
-    countOddEven = sorter.oddEvenSort(0)
-    print("ODDEVEN SORT --- Total Iterations: {}".format(countOddEven))
+    sorter.oddEvenSort(0)
     continueThings()
-    countStooge = sorter.stoogesort(0, 0, len(randomList) - 1)
-    print("STOOGE SORT --- Total Iterations: {}".format(countStooge))
+    sorter.stoogesort(0, 0, len(randomList) - 1)
     continueThings()
-    countCocktail = sorter.cocktailSort(0)
-    print("COCKTAIL SORT --- Total Iterations: {}".format(countCocktail))
+    sorter.cocktailSort(0)
     continueThings()
-    countBogo = sorter.bogo_sort(0)
-    print("BOGO SORT --- Total Iterations: {}".format(countBogo))
+    sorter.bogo_sort(0)
     finished()
 
 if __name__ == "__main__":

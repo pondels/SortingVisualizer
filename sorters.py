@@ -131,12 +131,12 @@ class Sorters():
         # totalBogo is a list of lists that appends a number
         # of items to check how many times it had x amount
         # of numbers correct when it randomized
-        new_list = [i for i in range(8)]
+        new_list = [i + 1 for i in range(7)]
         random.shuffle(new_list)
         totalBogo = [[] for _ in range(len(self.list) + 1)]
 
         # Runs while the list isn't sorted
-        self.sorted = [i for i in range(8)]
+        self.sorted = [i + 1 for i in range(7)]
         while new_list != self.sorted:
             count += 1
             # Shuffles the list
