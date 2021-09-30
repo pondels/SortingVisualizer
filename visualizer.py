@@ -27,17 +27,13 @@ class Visualizer():
 
         if variable == 'slow':
             time.sleep(.1)
-        elif variable == 'fast':
-            pass
 
     def run_self(self, list, itemOne, itemTwo, speedUp, nameOfAlg, count):
 
         # Runs the buffer
         if itemTwo != None and not speedUp:
             self.time_buffer("slow")
-        else:
-            self.time_buffer("fast")
-        
+
         # 'resets' the screen
         self.screen.fill((0, 0, 0))
 
