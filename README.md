@@ -49,3 +49,7 @@
 - [Odd-Even Sort](https://www.geeksforgeeks.org/odd-even-sort-brick-sort/)
 - [Shell Sort](https://www.w3resource.com/ODSA/AV/Sorting/shellsortAV.html)
 - [Stooge Sort](https://www.geeksforgeeks.org/stooge-sort/)
+
+# Future Work
+- Add more sorting algorithms
+- User input system for data
